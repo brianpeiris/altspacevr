@@ -26,11 +26,11 @@ function createLaser (data) {
   scene.add(laserContainer);
 
   var laserObj = new THREE.Mesh(
-    new THREE.BoxGeometry(0.01, 0.01, 3),
+    new THREE.BoxGeometry(0.01, 0.01, 5),
     new THREE.MeshBasicMaterial({color: 'red'})
   );
-  laserObj.position.z = 1.5 * scene.scale.x;
-  laserObj.scale.multiplyScalar(scene.scale.x);
+  laserObj.position.z = 2.5 * 50;
+  laserObj.scale.multiplyScalar(50);
   laserContainer.add(laserObj);
 
   return laserContainer;
@@ -43,9 +43,11 @@ var laserBehavior = {
       this.laser = sceneSync.instantiate('laser', {hand: controller.hand});
       this.laserData = this.laser.getBehaviorByType('Object3DSync').dataRef;
     }
-    if (controller && controller.buttons[SteamVRInputBehavior.BUTTON_TRIGGER].pressed && !this.visible) {
-      this.visible = true;
-      this.laserData.child('visible').set(this.visible);
+    if (controller && controller.buttons[SteamVRInputBehavior.BUTTON_TRIGGER].pressed) {
+      if (!this.visible) {
+        this.visible = true;
+        this.laserData.child('visible').set(this.visible);
+      }
     }
     else if (this.visible) {
       this.visible = false;
