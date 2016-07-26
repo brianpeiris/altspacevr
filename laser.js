@@ -29,8 +29,8 @@ function createLaser (data) {
     new THREE.BoxGeometry(0.01, 0.01, 3),
     new THREE.MeshBasicMaterial({color: 'red'})
   );
-  laserObj.position.z = 1.5 * 285;
-  laserObj.scale.multiplyScalar(285);
+  laserObj.position.z = 1.5 * scene.scale.x;
+  laserObj.scale.multiplyScalar(scene.scale.x);
   laserContainer.add(laserObj);
 
   return laserContainer;
